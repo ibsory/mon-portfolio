@@ -376,20 +376,11 @@ cursor: pointer;
     .home-content h1{
         font-size: 4rem;
     }
-    .home-img img{
-        width: 70vw;
-        margin-top: 4rem;
-    }
-    .home-content{
-        order: 2;
-    }
-    .services h2{
-        margin-bottom: 3rem;
-    }
+    .ho
     .projects h2{
         margin-bottom: 3rem;
     }
     .projects-container{
         grid-template-columns: repeat(2, 1fr);
     }   
-}
+} 

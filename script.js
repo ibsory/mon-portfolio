@@ -1,56 +1,73 @@
-let menuIcon= document.querySelector('#menu-icon');
-let navbar= document.querySelector('.navbar');  
+let menuIcon = document.querySelector('#menu-icon');
+let navbar = document.querySelector('.navbar');
 
-menuIcon.onclick = () =>{
-    menuIcon.classList.toggle('fa-xmark');
-    navbar.classList.toggle('active');
+if (menuIcon) {
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('fa-xmark');
+        navbar.classList.toggle('active');
+    }
 }
 
-/***********************scroll section active link */
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
-window.onscroll = () =>{
-    sections.forEach(sec =>{
+window.onscroll = () => {
+    sections.forEach(sec => {
         let top = window.scrollY;
         let offset = sec.offsetTop - 150;
         let height = sec.offsetHeight;
         let id = sec.getAttribute('id');
-        if(top >= offset && top < offset + height){
-            navLinks.forEach.apply(links =>{
+        if (top >= offset && top < offset + height) {
+            navLinks.forEach(links => {
                 links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-            }); 
-        };
-    });  
+                let activeLink = document.querySelector('header nav a[href*=' + id + ']');
+                if (activeLink) activeLink.classList.add('active');
+            });
+        }
+    });
 
-    /*******************sticky header */
     let header = document.querySelector('header');
-    header.classList.toggle('sticky', window.scrollY > 100); 
+    if (header) {
+        header.classList.toggle('sticky', window.scrollY > 100);
+    }
 
-    /*******************remove toggle icon and navbar when click navbar link (scroll) */
-    menuIcon.classList.remove('fa-xmark');
-    navbar.classList.remove('active');
+    if (menuIcon) {
+        menuIcon.classList.remove('fa-xmark');
+    }
+    if (navbar) {
+        navbar.classList.remove('active');
+    }
 }
 
-/*******************scroll reveal */
 ScrollReveal({
     distance: '80px',
     duration: 2000,
     delay: 200
-});     
+});
 
-ScrollReveal().reveal('.home-content, .heading', {origin: 'top'});
-ScrollReveal().reveal('.home-img, .services-container, .projects-container, .contact form', {origin: 'bottom'});
-ScrollReveal().reveal('.home-content h1, .about-img', {origin: 'left'});
-ScrollReveal().reveal('.home-content p, .about-content', {origin: 'right'});
+ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
+ScrollReveal().reveal('.home-img, .services-container, .projects-container, .contact form', { origin: 'bottom' });
+ScrollReveal().reveal('.home-content h2, .about-img', { origin: 'left' });
+ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
 
-/*******************typed js */
 const typed = new Typed('.multiple-text', {
-    strings: ['Frontend Developer', 'DevOps Engineer', 'Freelancer'],
+    strings: ['apprenti développeur', 'étudiant en Licence', 'passionné par le web'],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 1000,
     loop: true
 });
 
+// Téléchargement du CV
+const cvButton = document.querySelector('.btn[href*="cv.pdf"]');
+if (cvButton) {
+    cvButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.href = 'Ibrahima_Sory_Diallo-CV.pdf';
+        link.download = 'Ibrahima_Sory_Diallo-CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
